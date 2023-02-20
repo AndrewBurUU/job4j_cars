@@ -32,4 +32,4 @@
 - вход пользователя: скрин7;
 
 # Контакты
-mymail@gmail.com
+mymail@gmail.com.
