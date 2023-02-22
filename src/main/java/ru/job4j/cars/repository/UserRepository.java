@@ -73,8 +73,7 @@ public class UserRepository {
      */
     public List<User> findAllOrderById() {
         Session session = sf.openSession();
-        Query<User> query = session.createQuery("from User order by id", User.class);
-        List<User> res = query.list();
+        List<User> res = session.createQuery("from User order by id", User.class).list();
         session.close();
         return res;
     }
@@ -85,9 +84,9 @@ public class UserRepository {
      */
     public Optional<User> findById(int userId) {
         Session session = sf.openSession();
-        Query<User> query = session.createQuery("from User where id = :fId", User.class);
-        query.setParameter("fId", userId);
-        Optional<User> res = Optional.of(query.uniqueResult());
+        Optional<User> res = session.createQuery("from User where id = :fId", User.class)
+                .setParameter("fId", userId)
+                .uniqueResultOptional();
         session.close();
         return res;
     }
@@ -99,10 +98,9 @@ public class UserRepository {
      */
     public List<User> findByLikeLogin(String key) {
         Session session = sf.openSession();
-        Query<User> query = session.createQuery(
-                "from User where login like :fKey", User.class);
-        query.setParameter("fKey", key);
-        List<User> res = query.list();
+        List<User> res = session.createQuery(
+                "from User where login like :fKey", User.class)
+                        .setParameter("fKey", key).list();
         session.close();
         return res;
     }
@@ -114,9 +112,9 @@ public class UserRepository {
      */
     public Optional<User> findByLogin(String login) {
         Session session = sf.openSession();
-        Query<User> query = session.createQuery("from User where login = :fLogin", User.class);
-        query.setParameter("fLogin", login);
-        Optional<User> res = Optional.of(query.uniqueResult());
+        Optional<User> res = session.createQuery("from User where login = :fLogin", User.class)
+                .setParameter("fLogin", login)
+                .uniqueResultOptional();
         session.close();
         return res;
     }
