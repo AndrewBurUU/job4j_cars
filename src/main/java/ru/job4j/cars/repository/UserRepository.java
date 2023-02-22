@@ -39,7 +39,9 @@ public class UserRepository {
             session.createQuery("UPDATE User SET login = :fLogin, password = :fPassword WHERE id = :fId")
                     .setParameter("fLogin", user.getLogin())
                     .setParameter("fPassword", user.getPassword())
-                    .setParameter("fId", user.getId());
+                    .setParameter("fId", user.getId())
+                    .executeUpdate();
+            session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
         }
@@ -72,8 +74,9 @@ public class UserRepository {
     public List<User> findAllOrderById() {
         Session session = sf.openSession();
         Query<User> query = session.createQuery("from User order by id", User.class);
+        List<User> res = query.list();
         session.close();
-        return query.list();
+        return res;
     }
 
     /**
@@ -84,8 +87,9 @@ public class UserRepository {
         Session session = sf.openSession();
         Query<User> query = session.createQuery("from User where id = :fId", User.class);
         query.setParameter("fId", userId);
+        Optional<User> res = Optional.of(query.uniqueResult());
         session.close();
-        return Optional.of(query.uniqueResult());
+        return res;
     }
 
     /**
@@ -98,8 +102,9 @@ public class UserRepository {
         Query<User> query = session.createQuery(
                 "from User where login like :fKey", User.class);
         query.setParameter("fKey", key);
+        List<User> res = query.list();
         session.close();
-        return query.list();
+        return res;
     }
 
     /**
@@ -111,7 +116,8 @@ public class UserRepository {
         Session session = sf.openSession();
         Query<User> query = session.createQuery("from User where login = :fLogin", User.class);
         query.setParameter("fLogin", login);
+        Optional<User> res = Optional.of(query.uniqueResult());
         session.close();
-        return Optional.of(query.uniqueResult());
+        return res;
     }
 }
