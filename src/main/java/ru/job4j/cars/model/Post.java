@@ -28,5 +28,5 @@ public class Post {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
-    private List<PriceHistory> histories;
+    private List<PriceHistory> histories = new ArrayList<>();
 }
