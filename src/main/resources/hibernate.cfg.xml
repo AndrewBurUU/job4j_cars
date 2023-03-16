@@ -15,5 +15,10 @@
         <mapping class="ru.job4j.cars.model.User"/>
         <mapping class="ru.job4j.cars.model.PriceHistory"/>
         <mapping class="ru.job4j.cars.model.Participate"/>
+        <mapping class="ru.job4j.cars.model.Car"/>
+        <mapping class="ru.job4j.cars.model.Driver"/>
+        <mapping class="ru.job4j.cars.model.Engine"/>
+        <mapping class="ru.job4j.cars.model.HistoryOwner"/>
+        <mapping class="ru.job4j.cars.model.Post"/>
     </session-factory>
 </hibernate-configuration>
