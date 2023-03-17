@@ -15,7 +15,7 @@ public class CarsRun {
                 .configure().build();
         try {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-            var stored = listOf("FROM Post WHERE car_id in (SELECT id FROM Car WHERE name like 'BMW')", Post.class, sf);
+            var stored = listOf("SELECT p FROM Post p WHERE p.files.size > 0", Post.class, sf);
             for (Post post : stored) {
                 System.out.println(post.getDescription());
             }

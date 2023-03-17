@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.stereotype.*;
 import ru.job4j.cars.model.*;
 
+import java.time.*;
 import java.util.*;
 
 @Repository
@@ -14,19 +15,18 @@ public class HbmPostRepository implements PostRepository {
 
     @Override
     public Collection<Post> findForLastDay() {
-        return crudRepository.query("FROM Post WHERE created >= "
-                + "(SELECT DATE_TRUNC('day', max(created)) FROM Post)", Post.class);
+        return crudRepository.query("FROM Post WHERE created >= :fLastDay", Post.class,
+                Map.of("fLastDay", LocalDate.now().minusDays(1)));
     }
 
     @Override
     public Collection<Post> findWithPhoto() {
-        return crudRepository.query("FROM Post WHERE id in "
-                + "(SELECT id FROM File)", Post.class);
+        return crudRepository.query("SELECT p FROM Post p WHERE p.files.size > 0", Post.class);
     }
 
     @Override
     public Collection<Post> findOnCar(String name) {
-        return crudRepository.query("FROM Post WHERE car_id in (SELECT id FROM Car WHERE name like :fName)", Post.class,
+        return crudRepository.query("SELECT p FROM Post p WHERE p.car.name like :fName)", Post.class,
                 Map.of("fName", name));
     }
 }
