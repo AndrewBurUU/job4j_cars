@@ -1,6 +1,5 @@
 package ru.job4j.cars.model;
 
-import java.time.*;
 import java.util.*;
 import javax.persistence.*;
 import lombok.*;

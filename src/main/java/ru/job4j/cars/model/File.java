@@ -1,6 +1,5 @@
 package ru.job4j.cars.model;
 
-import java.time.*;
 import javax.persistence.*;
 import lombok.*;
 import lombok.EqualsAndHashCode.Include;
@@ -10,19 +9,18 @@ import lombok.EqualsAndHashCode.Include;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "price_history")
-public class PriceHistory {
+@Table(name = "files")
+public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Include
     private int id;
 
-    private int before;
+    private String name;
 
-    private int after;
-
-    private LocalDateTime created = LocalDateTime.now();
+    @Include
+    private String path;
 
     @Column(name = "post_id")
     private int postId;

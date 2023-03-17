@@ -16,5 +16,6 @@
     <include file="scripts/006_ddl_driver_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/007_ddl_history_owner_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/008_ddl_alter_auto_post_add_car.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/009_ddl_create_files_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/update_004.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
