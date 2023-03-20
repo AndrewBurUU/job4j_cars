@@ -24,7 +24,8 @@ public class PriceHistory {
 
     private LocalDateTime created = LocalDateTime.now();
 
-    @Column(name = "post_id")
-    private int postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
 }

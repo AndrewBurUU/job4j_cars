@@ -26,6 +26,6 @@ public class HbmParticipateRepository implements ParticipateRepository {
 
     @Override
     public Collection<Participate> findAll() {
-        return crudRepository.query("FROM Participate", Participate.class);
+        return crudRepository.query("FROM Participate p JOIN FETCH p.post", Participate.class);
     }
 }

@@ -3,6 +3,7 @@ package ru.job4j.cars.model;
 import lombok.*;
 
 import javax.persistence.*;
+import lombok.EqualsAndHashCode.Include;
 
 @Data
 @AllArgsConstructor
@@ -13,11 +14,15 @@ import javax.persistence.*;
 public class Participate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
+    @Include
     private int id;
 
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    private int postId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

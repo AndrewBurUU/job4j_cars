@@ -106,9 +106,9 @@ class HbmPostRepositoryTest {
         var engine = new Engine(1, "engine1");
         var car = new Car(1, "car1", engine, Set.of(driver));
 
-        var priceHistory = new PriceHistory(1, 1, 2, creationDate, 1);
-        var participate = new Participate(1, 1, 1);
-        var file = new File(1, "file1", "files/BMWBack.jpg", 1);
+        var priceHistory = new PriceHistory(1, 1, 2, creationDate, new Post());
+        var participate = new Participate(1, new Post(), user);
+        var file = new File(1, "file1", "files/BMWBack.jpg", new Post());
         var post = new Post(1, "post1", creationDate,
                 user,
                 car,
