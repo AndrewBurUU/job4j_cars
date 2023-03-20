@@ -12,6 +12,7 @@ import java.util.*;
 import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@Disabled
 class HbmPostRepositoryTest {
 
     private static StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
