@@ -1,0 +1,1 @@
+insert into history_owner(startAt, endAt, car_id, driver_id) values (CURRENT_DATE + TIME '01:00', CURRENT_DATE + TIME '02:00', 1, 1);

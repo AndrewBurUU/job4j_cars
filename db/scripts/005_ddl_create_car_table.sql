@@ -1,4 +1,4 @@
-create table if not exists car
+create table car
 (
     id serial primary key,
     name varchar not null,

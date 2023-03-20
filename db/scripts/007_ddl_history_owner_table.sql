@@ -1,4 +1,4 @@
-create table if not exists history_owner
+create table history_owner
 (
     id serial primary key,
 	startAt timestamp,

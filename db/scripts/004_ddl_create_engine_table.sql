@@ -1,4 +1,4 @@
-create table if not exists engine
+create table engine
 (
     id serial primary key,
     name varchar not null

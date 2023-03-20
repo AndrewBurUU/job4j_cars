@@ -1,0 +1,1 @@
+insert into auto_user(login, password) values('andrew1@mail.ru', '1');

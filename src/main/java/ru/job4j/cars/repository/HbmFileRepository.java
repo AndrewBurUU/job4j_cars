@@ -8,24 +8,24 @@ import java.util.*;
 
 @Repository
 @AllArgsConstructor
-public class HbmDriverRepository implements DriverRepository {
+public class HbmFileRepository implements FileRepository {
 
     private final CrudRepository crudRepository;
 
     @Override
-    public Driver save(Driver driver) {
-        crudRepository.run(session -> session.persist(driver));
-        return driver;
+    public File save(File file) {
+        crudRepository.run(session -> session.persist(file));
+        return file;
     }
 
     @Override
     public void deleteById(int id) {
-        crudRepository.run("DELETE Driver WHERE id = :fId",
+        crudRepository.run("DELETE File WHERE id = :fId",
                 Map.of("fId", id));
     }
 
     @Override
-    public Collection<Driver> findAll() {
-        return crudRepository.query("FROM Driver", Driver.class);
+    public Collection<File> findAll() {
+        return crudRepository.query("FROM File", File.class);
     }
 }

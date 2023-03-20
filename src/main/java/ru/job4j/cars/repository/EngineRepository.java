@@ -6,5 +6,9 @@ import ru.job4j.cars.model.Engine;
 
 public interface EngineRepository {
 
+    Engine save(Engine engine);
+
     Collection<Engine> findAll();
+
+    void deleteById(int id);
 }

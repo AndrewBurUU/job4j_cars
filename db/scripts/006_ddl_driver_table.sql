@@ -1,4 +1,4 @@
-create table if not exists driver
+create table driver
 (
     id serial primary key,
     name varchar not null,
