@@ -38,7 +38,7 @@ public class HbmPostRepository implements PostRepository {
 
     @Override
     public Collection<Post> findOnCar(String name) {
-        return crudRepository.query("SELECT p FROM Post p WHERE p.car.name like :fName)", Post.class,
+        return crudRepository.query("SELECT p FROM Post p WHERE p.car.name like :fName", Post.class,
                 Map.of("fName", name));
     }
 

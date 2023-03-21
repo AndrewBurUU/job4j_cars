@@ -75,7 +75,7 @@ class HbmPostRepositoryTest {
     }
 
     @AfterEach
-    public void clearTasks() {
+    public void clearPosts() {
         var files = hbmFileRepository.findAll();
         for (var file : files) {
             hbmFileRepository.deleteById(file.getId());
@@ -98,24 +98,63 @@ class HbmPostRepositoryTest {
     }
 
     @Test
+    public void whenFirstFindAllThenGetNothing() {
+        var res = hbmPostRepository.findAll();
+        assertThat(res.size()).isEqualTo(0);
+    }
+
+    @Test
     public void whenSaveThenGetSame() {
         var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
-        var user = new User(1, "user1", "1");
-        var driver = new Driver(1, "driver1", 1);
-        var engine = new Engine(1, "engine1");
-        var car = new Car(1, "car1", engine, Set.of(driver));
+        var user = new User();
+        user.setLogin("user1");
+        user.setPassword("1");
+        user = userRepository.create(user);
 
-        var priceHistory = new PriceHistory(1, 1, 2, creationDate);
-        var file = new File(1, "file1", "files/BMWBack.jpg");
-        var post = new Post(1, "post1", creationDate,
-                user,
-                car,
-                List.of(priceHistory),
-                List.of(user),
-                List.of(file));
+        var engine = new Engine();
+        engine.setName("engine1");
+        engine = hbmEngineRepository.save(engine);
+
+        var car = new Car();
+        car.setName("car1");
+        car.setEngine(engine);
+        car = hbmCarRepository.save(car);
+
+        var post = new Post();
+        post.setDescription("post1");
+        post.setCreated(creationDate);
+        post.setUser(user);
+        post.setCar(car);
         post = hbmPostRepository.save(post);
         var savedPost = hbmPostRepository.findById(post.getId()).get();
         assertThat(savedPost).usingRecursiveComparison().isEqualTo(post);
+    }
+
+    @Test
+    public void whenFindCarThenGetSame() {
+        var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
+        var user = new User();
+        user.setLogin("user1");
+        user.setPassword("1");
+        user = userRepository.create(user);
+
+        var engine = new Engine();
+        engine.setName("engine1");
+        engine = hbmEngineRepository.save(engine);
+
+        var car = new Car();
+        car.setName("car1");
+        car.setEngine(engine);
+        car = hbmCarRepository.save(car);
+
+        var post = new Post();
+        post.setDescription("post1");
+        post.setCreated(creationDate);
+        post.setUser(user);
+        post.setCar(car);
+        post = hbmPostRepository.save(post);
+        var findOnCar = hbmPostRepository.findOnCar(car.getName());
+        assertThat(findOnCar).isEqualTo(List.of(post));
     }
 
 }

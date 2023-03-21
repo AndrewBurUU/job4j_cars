@@ -31,21 +31,4 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
-    private List<PriceHistory> histories = new ArrayList<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "participates",
-            joinColumns = { @JoinColumn(name = "post_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
-    )
-    private List<User> participates = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
-    private List<File> files = new ArrayList<>();
-
 }
