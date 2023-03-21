@@ -8,8 +8,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.job4j.cars.model.*;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CarsRun {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CarsRun.class.getName());
+
     public static void main(String[] args) {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure().build();
