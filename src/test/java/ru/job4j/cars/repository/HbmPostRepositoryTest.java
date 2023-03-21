@@ -101,13 +101,12 @@ class HbmPostRepositoryTest {
     public void whenSaveThenGetSame() {
         var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
         var user = new User(1, "user1", "1");
-        var driver = new Driver(1, "driver1", user);
+        var driver = new Driver(1, "driver1", 1);
         var engine = new Engine(1, "engine1");
         var car = new Car(1, "car1", engine, Set.of(driver));
 
-        var priceHistory = new PriceHistory(1, 1, 2, creationDate, new Post());
-        var participate = new Participate(1, new Post(), user);
-        var file = new File(1, "file1", "files/BMWBack.jpg", new Post());
+        var priceHistory = new PriceHistory(1, 1, 2, creationDate);
+        var file = new File(1, "file1", "files/BMWBack.jpg");
         var post = new Post(1, "post1", creationDate,
                 user,
                 car,

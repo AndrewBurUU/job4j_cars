@@ -17,12 +17,10 @@ public class Participate {
     @Include
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @Column(name = "post_id")
+    private int postId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private int userId;
 
 }
