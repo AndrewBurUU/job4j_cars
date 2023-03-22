@@ -5,6 +5,7 @@ import org.springframework.stereotype.*;
 import ru.job4j.cars.model.*;
 
 import java.time.*;
+import java.time.temporal.*;
 import java.util.*;
 
 @Repository
@@ -28,7 +29,7 @@ public class HbmPostRepository implements PostRepository {
     @Override
     public Collection<Post> findForLastDay() {
         return crudRepository.query("FROM Post WHERE created >= :fLastDay", Post.class,
-                Map.of("fLastDay", LocalDate.now().minusDays(1)));
+                Map.of("fLastDay", LocalDateTime.now().truncatedTo(ChronoUnit.HOURS).minusDays(1)));
     }
 
     @Override

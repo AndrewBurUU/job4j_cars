@@ -126,8 +126,98 @@ class HbmPostRepositoryTest {
         post.setUser(user);
         post.setCar(car);
         post = hbmPostRepository.save(post);
+
+        var file = new File();
+        file.setName("file1");
+        file.setPath("files/BMWBack.jpg");
+        file.setPostId(post.getId());
+        file = hbmFileRepository.save(file);
+
+        post.setFiles(List.of(file));
+
         var savedPost = hbmPostRepository.findById(post.getId()).get();
         assertThat(savedPost).usingRecursiveComparison().isEqualTo(post);
+    }
+
+    @Test
+    public void whenFindByIncorrectIdThenGetEmpty() {
+        var creationDate = now().truncatedTo(ChronoUnit.MINUTES);
+        var user = new User();
+        user.setLogin("user1");
+        user.setPassword("1");
+        user = userRepository.create(user);
+
+        var engine = new Engine();
+        engine.setName("engine1");
+        engine = hbmEngineRepository.save(engine);
+
+        var car = new Car();
+        car.setName("car1");
+        car.setEngine(engine);
+        car = hbmCarRepository.save(car);
+
+        var post = new Post();
+        post.setDescription("post1");
+        post.setCreated(creationDate);
+        post.setUser(user);
+        post.setCar(car);
+        post = hbmPostRepository.save(post);
+        var savedPost = hbmPostRepository.findById(2);
+        assertThat(savedPost).isEqualTo(Optional.empty());
+    }
+
+    @Test
+    public void whenFindForLastDayThenGetSame() {
+        var creationDate = now().truncatedTo(ChronoUnit.MINUTES).minusDays(1);
+        var user = new User();
+        user.setLogin("user1");
+        user.setPassword("1");
+        user = userRepository.create(user);
+
+        var engine = new Engine();
+        engine.setName("engine1");
+        engine = hbmEngineRepository.save(engine);
+
+        var car = new Car();
+        car.setName("car1");
+        car.setEngine(engine);
+        car = hbmCarRepository.save(car);
+
+        var post = new Post();
+        post.setDescription("post1");
+        post.setCreated(creationDate);
+        post.setUser(user);
+        post.setCar(car);
+        post = hbmPostRepository.save(post);
+        var savedPost = hbmPostRepository.findForLastDay();
+        assertThat(savedPost).isEqualTo(List.of(post));
+    }
+
+    @Test
+    public void whenFindWithPhotoThenGetSame() {
+        var creationDate = now().truncatedTo(ChronoUnit.MINUTES).minusDays(1);
+        var user = new User();
+        user.setLogin("user1");
+        user.setPassword("1");
+        user = userRepository.create(user);
+
+        var engine = new Engine();
+        engine.setName("engine1");
+        engine = hbmEngineRepository.save(engine);
+
+        var car = new Car();
+        car.setName("car1");
+        car.setEngine(engine);
+        car = hbmCarRepository.save(car);
+
+        var post = new Post();
+        post.setDescription("post1");
+        post.setCreated(creationDate);
+        post.setUser(user);
+        post.setCar(car);
+        post = hbmPostRepository.save(post);
+        var savedPost = hbmPostRepository.findForLastDay();
+        assertThat(savedPost).isEqualTo(List.of(post));
     }
 
     @Test

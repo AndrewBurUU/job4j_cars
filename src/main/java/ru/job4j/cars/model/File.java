@@ -22,4 +22,7 @@ public class File {
     @Include
     private String path;
 
+    @Column(name = "post_id")
+    private int postId;
+
 }
