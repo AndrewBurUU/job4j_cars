@@ -22,7 +22,7 @@ public class HbmPostRepository implements PostRepository {
 
     @Override
     public Optional<Post> findById(int id) {
-        return crudRepository.optional("from Post where id = :fId", Post.class,
+        return crudRepository.optional("from Post p JOIN FETCH p.files where p.id = :fId", Post.class,
                 Map.of("fId", id));
     }
 
