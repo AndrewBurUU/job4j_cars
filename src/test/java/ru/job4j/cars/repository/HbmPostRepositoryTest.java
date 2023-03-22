@@ -130,7 +130,7 @@ class HbmPostRepositoryTest {
         var file = new File();
         file.setName("file1");
         file.setPath("files/BMWBack.jpg");
-        file.setPostId(post.getId());
+        file.setPost(post);
         file = hbmFileRepository.save(file);
 
         post.setFiles(List.of(file));
