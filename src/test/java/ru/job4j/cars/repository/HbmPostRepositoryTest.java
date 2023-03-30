@@ -23,7 +23,7 @@ class HbmPostRepositoryTest {
 
     private static HbmPostRepository hbmPostRepository;
 
-    private static UserRepository userRepository;
+    private static HbmUserRepository hbmUserRepository;
 
     private static HbmEngineRepository hbmEngineRepository;
 
@@ -43,7 +43,7 @@ class HbmPostRepositoryTest {
     public static void initRepositories() throws Exception {
         crudRepository = new CrudRepository(sf);
         hbmPostRepository = new HbmPostRepository(crudRepository);
-        userRepository = new UserRepository(crudRepository);
+        hbmUserRepository = new HbmUserRepository(crudRepository);
         hbmEngineRepository = new HbmEngineRepository(crudRepository);
         hbmCarRepository = new HbmCarRepository(crudRepository);
         hbmPriceHistoryRepository = new HbmPriceHistoryRepository(crudRepository);
@@ -109,7 +109,7 @@ class HbmPostRepositoryTest {
         var user = new User();
         user.setLogin("user1");
         user.setPassword("1");
-        user = userRepository.create(user);
+        user = hbmUserRepository.save(user).get();
 
         var engine = new Engine();
         engine.setName("engine1");
@@ -145,7 +145,7 @@ class HbmPostRepositoryTest {
         var user = new User();
         user.setLogin("user1");
         user.setPassword("1");
-        user = userRepository.create(user);
+        user = hbmUserRepository.save(user).get();
 
         var engine = new Engine();
         engine.setName("engine1");
@@ -172,7 +172,7 @@ class HbmPostRepositoryTest {
         var user = new User();
         user.setLogin("user1");
         user.setPassword("1");
-        user = userRepository.create(user);
+        user = hbmUserRepository.save(user).get();
 
         var engine = new Engine();
         engine.setName("engine1");
@@ -199,7 +199,7 @@ class HbmPostRepositoryTest {
         var user = new User();
         user.setLogin("user1");
         user.setPassword("1");
-        user = userRepository.create(user);
+        user = hbmUserRepository.save(user).get();
 
         var engine = new Engine();
         engine.setName("engine1");
@@ -226,7 +226,7 @@ class HbmPostRepositoryTest {
         var user = new User();
         user.setLogin("user1");
         user.setPassword("1");
-        user = userRepository.create(user);
+        user = hbmUserRepository.save(user).get();
 
         var engine = new Engine();
         engine.setName("engine1");
@@ -253,7 +253,7 @@ class HbmPostRepositoryTest {
         var user = new User();
         user.setLogin("user1");
         user.setPassword("1");
-        user = userRepository.create(user);
+        user = hbmUserRepository.save(user).get();
 
         var engine = new Engine();
         engine.setName("engine1");
@@ -289,7 +289,7 @@ class HbmPostRepositoryTest {
         var user = new User();
         user.setLogin("user1");
         user.setPassword("1");
-        user = userRepository.create(user);
+        user = hbmUserRepository.save(user).get();
 
         var engine = new Engine();
         engine.setName("engine1");

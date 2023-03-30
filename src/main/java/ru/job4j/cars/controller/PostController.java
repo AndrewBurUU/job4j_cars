@@ -79,7 +79,8 @@ public class PostController {
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute Post post, Model model, HttpServletRequest req, @RequestParam MultipartFile file) {
+    public String update(@ModelAttribute Post post, Model model, HttpServletRequest req,
+                         @RequestParam MultipartFile file) {
         try {
             var isUpdated = postService.update(post);
             if (!isUpdated) {
