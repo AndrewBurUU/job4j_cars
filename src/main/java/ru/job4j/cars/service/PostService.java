@@ -1,10 +1,10 @@
-package ru.job4j.cars.repository;
+package ru.job4j.cars.service;
 
 import ru.job4j.cars.model.*;
 
 import java.util.*;
 
-public interface PostRepository {
+public interface PostService {
 
     Post save(Post post);
 
@@ -21,4 +21,5 @@ public interface PostRepository {
     Collection<Post> findAll();
 
     boolean deleteById(int id);
+
 }

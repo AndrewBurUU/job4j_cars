@@ -24,6 +24,9 @@ public class CarsRun {
             for (Post post : stored) {
                 System.out.println(post.getDescription());
             }
+            Post post = new Post();
+            List<File> files = post.getFiles();
+            String s = files.get(0).getPath();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

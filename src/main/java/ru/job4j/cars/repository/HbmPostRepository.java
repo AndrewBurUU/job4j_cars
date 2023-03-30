@@ -21,8 +21,22 @@ public class HbmPostRepository implements PostRepository {
     }
 
     @Override
+    public boolean update(Post post) {
+        Post postBefore = new Post(
+                post.getId(),
+                post.getDescription(),
+                post.getCreated(),
+                post.getUser(),
+                post.getCar(),
+                post.getFiles()
+        );
+        crudRepository.run(session -> session.merge(post));
+        return postBefore.equals(post);
+    }
+
+    @Override
     public Optional<Post> findById(int id) {
-        return crudRepository.optional("from Post p JOIN FETCH p.files where p.id = :fId", Post.class,
+        return crudRepository.optional("from Post p LEFT JOIN FETCH p.files where p.id = :fId", Post.class,
                 Map.of("fId", id));
     }
 
@@ -49,9 +63,9 @@ public class HbmPostRepository implements PostRepository {
     }
 
     @Override
-    public void deleteById(int id) {
-        crudRepository.run("DELETE Post WHERE id = :fId",
-                Map.of("fId", id));
+    public boolean deleteById(int id) {
+        return crudRepository.run("DELETE Post WHERE id = :fId",
+                Map.of("fId", id)) > 0;
     }
 
 }

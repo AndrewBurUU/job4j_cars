@@ -19,6 +19,24 @@ public class HbmFileRepository implements FileRepository {
     }
 
     @Override
+    public boolean update(File file) {
+        File fileBefore = new File(
+                file.getId(),
+                file.getName(),
+                file.getPath(),
+                file.getPost()
+        );
+        crudRepository.run(session -> session.merge(file));
+        return fileBefore.equals(file);
+    }
+
+    @Override
+    public Optional<File> findById(int id) {
+        return crudRepository.optional("FROM File WHERE id = :fId", File.class,
+                Map.of("fId", id));
+    }
+
+    @Override
     public void deleteById(int id) {
         crudRepository.run("DELETE File WHERE id = :fId",
                 Map.of("fId", id));
