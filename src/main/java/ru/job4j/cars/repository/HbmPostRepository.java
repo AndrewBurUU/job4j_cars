@@ -21,17 +21,8 @@ public class HbmPostRepository implements PostRepository {
     }
 
     @Override
-    public boolean update(Post post) {
-        Post postBefore = new Post(
-                post.getId(),
-                post.getDescription(),
-                post.getCreated(),
-                post.getUser(),
-                post.getCar(),
-                post.getFiles()
-        );
+    public void update(Post post) {
         crudRepository.run(session -> session.merge(post));
-        return postBefore.equals(post);
     }
 
     @Override

@@ -60,7 +60,7 @@ public class PostController {
             fileService.save(carFile);
             return "redirect:/posts/all";
         } catch (Exception e) {
-            model.addAttribute("message", e.getMessage());
+            model.addAttribute("message", String.format("Ошибка сохранения: %s", e.getMessage()));
             return "errors/404";
         }
     }
@@ -82,11 +82,7 @@ public class PostController {
     public String update(@ModelAttribute Post post, Model model, HttpServletRequest req,
                          @RequestParam MultipartFile file) {
         try {
-            var isUpdated = postService.update(post);
-            if (!isUpdated) {
-                model.addAttribute("message", "Ошибка обновления объявления.");
-                return "errors/404";
-            }
+            postService.update(post);
 
             List<File> files = postService.findById(post.getId()).get().getFiles();
             File carFile = new File();
@@ -94,6 +90,7 @@ public class PostController {
             carFile.setName(req.getParameter("foto"));
             carFile.setPost(post);
 
+            boolean isUpdated = false;
             if (files.isEmpty()) {
                 fileService.save(carFile);
             } else {
@@ -107,7 +104,7 @@ public class PostController {
 
             return "redirect:/posts/all";
         } catch (Exception e) {
-            model.addAttribute("message", e.getMessage());
+            model.addAttribute("message", String.format("Ошибка обновления: %s", e.getMessage()));
             return "errors/404";
         }
     }

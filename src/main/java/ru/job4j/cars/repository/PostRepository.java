@@ -8,7 +8,7 @@ public interface PostRepository {
 
     Post save(Post post);
 
-    boolean update(Post post);
+    void update(Post post);
 
     Optional<Post> findById(int id);
 

@@ -34,28 +34,6 @@ class HbmPostServiceTest {
     }
 
     @Test
-    public void whenUpdateThenTrue() {
-        var creationDate = now().truncatedTo(ChronoUnit.HOURS);
-        var post = postRepository.save(new Post(1, "post1", creationDate, new User(), new Car(), List.of()));
-        var postUpdated = new Post(1, "post2", creationDate, new User(), new Car(), List.of());
-        when(postRepository.update(postUpdated)).thenReturn(true);
-
-        var resultUpdate = hbmPostService.update(postUpdated);
-        assertThat(resultUpdate).isTrue();
-    }
-
-    @Test
-    public void whenNothingUpdateThenFalse() {
-        var creationDate = now().truncatedTo(ChronoUnit.HOURS);
-        var post = postRepository.save(new Post(1, "post1", creationDate, new User(), new Car(), List.of()));
-        var postUpdated = new Post(2, "post2", creationDate, new User(), new Car(), List.of());
-        when(postRepository.update(postUpdated)).thenReturn(false);
-
-        var resultUpdate = hbmPostService.update(postUpdated);
-        assertThat(resultUpdate).isFalse();
-    }
-
-    @Test
     public void whenFindByIdThenGetPost() {
         var creationDate = now().truncatedTo(ChronoUnit.HOURS);
         var post = new Post(1, "post1", creationDate, new User(), new Car(), List.of());

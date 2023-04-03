@@ -21,8 +21,8 @@ public class HbmPostService implements PostService {
     }
 
     @Override
-    public boolean update(Post post) {
-        return postRepository.update(post);
+    public void update(Post post) {
+        postRepository.update(post);
     }
 
     @Override
