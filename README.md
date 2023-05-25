@@ -40,4 +40,4 @@
 ![img.png](img/img_6.png)
 
 # Контакты
-mymail@gmail.com.
+andrew76k@rambler.ru
